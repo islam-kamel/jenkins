@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 333.19 91.35">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: Arial-BoldMT, Arial;
+        font-size: 72px;
+        font-weight: 700;
+      }
+
+      .cls-2 {
+        fill: #c69710;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(21.11 64.25)"><tspan x="0" y="0">JENKINS</tspan></text>
+  <polygon class="cls-2" points="18.37 0 24.05 11.5 36.74 13.35 27.56 22.3 29.72 34.94 18.37 28.97 7.02 34.94 9.19 22.3 0 13.35 12.69 11.5 18.37 0"/>
+</svg>
