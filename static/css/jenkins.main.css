@@ -20,7 +20,7 @@ h1 {
 }
 
 .product-desc {
-    min-height: calc(100% - 4.25rem);
-    max-height: calc(100% - 4.25rem);
+    min-height: calc(80% - 4rem);
+    max-height: calc(80% - 4rem);
 }
 
