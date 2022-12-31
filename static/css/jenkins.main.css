@@ -9,3 +9,18 @@ h1 {
     font-size: 3rem;
     font-weight: 700;
 }
+
+.bi {
+    fill: gray;
+    transition: ease-in all 0.2s;
+}
+
+.bi:hover {
+    fill: red;
+}
+
+.product-desc {
+    min-height: calc(100% - 4.25rem);
+    max-height: calc(100% - 4.25rem);
+}
+
