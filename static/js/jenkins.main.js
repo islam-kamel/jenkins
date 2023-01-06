@@ -1,20 +1,20 @@
 const fetched = new Event("fetched");
 const cache = {
+    products: null,
     search: function(query) {
         let products = JSON.parse(this.products)
         for (let product of products) {
             if (product.title.includes(query)) {
-                return product.title
+                return {id:product.id , title: product.title}
             }
         }
+        return false
     }
 };
 
 function FetchData(callBack) {
     let req = new XMLHttpRequest();
-    cache.products !== '' ? console.log("cache"): console.log("no")
     req.onreadystatechange = function () {
-        console.log("here")
         if (this.readyState === 4 && this.status === 200) {
             cache.products = this.response;
             callBack(this.response);
@@ -119,8 +119,10 @@ function displayData(data) {
         CreateElement(p)
     }
 }
+window.onload = function () {
+    cache.products ? displayData(cache.products) : FetchData(displayData)
 
-FetchData(displayData)
+}
 getCategories();
 
 function setRate() {
@@ -178,10 +180,17 @@ function slider() {
 setInterval(slider, 1500);
 
 searchInput.addEventListener("input", (e) => {
-//    let res = cache.search(e.target.value);
-//
-//
-//    searchResaultArea.innerHTML += `<h1 class="fs-4 card-title">${res}</h1>`
+    let product = cache.search(e.target.value);
+    if (!product || e.target.value === '') {
+        seRes.innerText = '';
+        seRes.parentNode.classList.remove("active")
+        return false
+    }
+    seRes.innerText = product.title;
+    seRes.setAttribute("data-traget", product.id)
+    seRes.parentNode.classList.add("active");
+})
 
-    console.log(e.target.value)
+seRes.addEventListener("click", e => {
+    console.log(e.target.dataset.traget)
 })
