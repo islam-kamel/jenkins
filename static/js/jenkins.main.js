@@ -1,31 +1,43 @@
+let images = Array.from(document.querySelectorAll(".slider-container .slider .slider-images img"));
+let lodaingArea = document.querySelector(".loading");
 const fetched = new Event("fetched");
+
 const cache = {
-    products: null,
     search: function(query) {
-        let products = JSON.parse(this.products)
+        let products = JSON.parse(this.getProducts())
         for (let product of products) {
             if (product.title.includes(query)) {
                 return {id:product.id , title: product.title}
             }
         }
         return false
+    },
+    cacheProducts: function (data) {
+        sessionStorage.setItem("products", data);
+    },
+    getProducts: function () {
+        return sessionStorage.getItem("products");
     }
 };
 
 function FetchData(callBack) {
     let req = new XMLHttpRequest();
+    let cacheResualt = cache.getProducts();
+    if (cacheResualt) {
+        window.dispatchEvent(fetched);
+        return  callBack(cacheResualt);
+    }
+
     req.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            cache.products = this.response;
+            cache.cacheProducts(this.response);
             callBack(this.response);
             window.dispatchEvent(fetched);
         }
     }
-
     req.open("GET", "https://fakestoreapi.com/products");
     req.send();
 }
-
 
 function CreateElement(data, callBack) {
     let card = `
@@ -34,7 +46,7 @@ function CreateElement(data, callBack) {
                 <img src="${data.image}" class="card-img-top" alt="Product image">
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h1 class="card-title" title="${data.title}">${data.title}</h1>
+                        <h1 class="card-title" onclick="getProduct(this)" title="${data.title}" data-target="${data.id}">${data.title}</h1>
                         <i class="material-icons-outlined love">favorite_border</i>
                     </div>
                     <div class="seller-info d-flex flex-column align-items-start mb-2">
@@ -54,9 +66,12 @@ function CreateElement(data, callBack) {
             </div>
         </div>
     `
-    callBack
-        ? callBack(card)
-        : root.innerHTML += card
+    if (callBack) {
+        callBack(card)
+    } else {
+        root.className = "row row-cols-lg-4 row-cols-md-3 row-cols-sm-1";
+        root.innerHTML += card;
+    }
 }
 
 function getCategories() {
@@ -119,11 +134,6 @@ function displayData(data) {
         CreateElement(p)
     }
 }
-window.onload = function () {
-    cache.products ? displayData(cache.products) : FetchData(displayData)
-
-}
-getCategories();
 
 function setRate() {
     let stars = document.querySelectorAll('.star-rate');
@@ -158,14 +168,6 @@ function setLove() {
     }
 }
 
-window.addEventListener("fetched", () => {
-    setRate();
-    setLove();
-})
-
-
-let images = Array.from(document.querySelectorAll(".slider-container .slider .slider-images img"));
-
 function slider() {
     if (images.length < 1) {
         images = Array.from(document.querySelectorAll(".slider-container .slider .slider-images img"))
@@ -177,20 +179,32 @@ function slider() {
     toggle(images.shift(), "active");
 }
 
-setInterval(slider, 1500);
+window.onload = function () {
+    FetchData(displayData)
+}
+
+window.addEventListener("fetched", () => {
+    lodaingArea.classList.add("loaded");
+    setTimeout(() => {
+        lodaingArea.style.display = "none";
+    }, 250);
+
+    setRate();
+    setLove();
+})
 
 searchInput.addEventListener("input", (e) => {
     let product = cache.search(e.target.value);
     if (!product || e.target.value === '') {
         seRes.innerText = '';
         seRes.parentNode.classList.remove("active")
-        return false
+        return false;
     }
     seRes.innerText = product.title;
-    seRes.setAttribute("data-traget", product.id)
     seRes.parentNode.classList.add("active");
+    seRes.addEventListener("click", e => getProduct(e.target));
 })
 
-seRes.addEventListener("click", e => {
-    console.log(e.target.dataset.traget)
-})
+
+getCategories();
+setInterval(slider, 1500);

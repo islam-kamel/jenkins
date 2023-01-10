@@ -6837,9 +6837,9 @@ textarea.form-control-lg {
 }
 
 .sticky-top {
-  position: -webkit-sticky;
+  /* position: sticky; */
   position: sticky;
-  top: 0;
+  top: -280px;
   z-index: 1020;
 }
 

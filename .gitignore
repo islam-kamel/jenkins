@@ -13,6 +13,10 @@
 .idea/**/shelf
 *.ai
 SVG/
+Hoda/
+details.html
+Cart-Page.html
+products.json
 
 # AWS User-specific
 .idea/**/aws.xml
