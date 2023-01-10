@@ -70,4 +70,5 @@ function showDetails(data) {
     hiddenSlider();
     root.className = "row";
     root.innerHTML = card;
+    setRate();
 }

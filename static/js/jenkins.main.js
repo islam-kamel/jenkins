@@ -24,8 +24,8 @@ function FetchData(callBack) {
     let req = new XMLHttpRequest();
     let cacheResualt = cache.getProducts();
     if (cacheResualt) {
-        window.dispatchEvent(fetched);
-        return  callBack(cacheResualt);
+        callBack(cacheResualt);
+        return window.dispatchEvent(fetched);
     }
 
     req.onreadystatechange = function () {
@@ -106,6 +106,7 @@ function filterByCategories(target) {
                 }
             })
         }
+        setRate();
         return true
     }
     req.onreadystatechange = function () {
@@ -122,6 +123,7 @@ function filterByCategories(target) {
                     }
                 })
             }
+            setRate();
         }
     }
     req.open("GET", `https://fakestoreapi.com/products/category/${target.dataset.bsTarget}`);
@@ -137,7 +139,6 @@ function displayData(data) {
 
 function setRate() {
     let stars = document.querySelectorAll('.star-rate');
-
     for (let star of stars) {
         star.innerHTML += '<i class="material-icons-outlined rated">star</i>'.repeat(+star.getAttribute("rating"))
         star.innerHTML += '<i class="material-icons-outlined">star_border</i>'.repeat(5 - +star.getAttribute("rating"))
