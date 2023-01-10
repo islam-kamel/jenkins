@@ -51,15 +51,15 @@ function CreateElement(data, callBack) {
                     </div>
                     <div class="seller-info d-flex flex-column align-items-start mb-2">
                         <div class="star-rate" rating="${Math.round(data.rating.rate)}">
-                            <hr>
                         </div>
                     </div>
+                    <hr>
                     <div class="d-flex flex-column justify-content-between product-desc">
                         <p class="card-text lh-base fs-4">${data.description}</p>
                         <div class="product-action d-flex align-items-center justify-content-between">
                             <span><strong class="">Price:</strong><span
                                 class="badge text-bg-light text-success mx-3">${data.price}$</span></span>
-                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-dark bg-text-dark">Add to Cart</button>
                         </div>
                     </div>
                 </div>
