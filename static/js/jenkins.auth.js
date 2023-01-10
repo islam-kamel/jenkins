@@ -61,7 +61,10 @@ function newUser() {
         fname: fname.value,
         lname: lname.value,
         username: username.value,
-        password: password1.value
+        password: password1.value,
+        orders: [],
+        productsRating: [],
+        lovedProducts: []
     };
 
     let obj = JSON.parse(localStorage.getItem("users"))
@@ -76,5 +79,19 @@ function login() {
         if (user.username == loginInfo.username && user.password == loginInfo.password) {
             console.log(user);
         }
+    }
+}
+
+
+class User {
+    constructor(data) {
+        // this.id
+        this.fname = data.fname;
+        this.lname = data.lname;
+        this.username = data.username;
+        this.password = data.password;
+        // this.orders
+        // this.productsRating
+        // this.lovedProducts
     }
 }

@@ -1,5 +1,8 @@
+const fetched = new Event("fetched");
+
 window.onload = function () {
-    FetchData(displayData)
+    FetchData(displayData);
+    getCategories();
 }
 
 window.addEventListener("fetched", () => {

@@ -1,24 +1,7 @@
 let images = Array.from(document.querySelectorAll(".slider-container .slider .slider-images img"));
 let lodaingArea = document.querySelector(".loading");
-const fetched = new Event("fetched");
 
-const cache = {
-    search: function(query) {
-        let products = JSON.parse(this.getProducts())
-        for (let product of products) {
-            if (product.title.includes(query)) {
-                return {id:product.id , title: product.title}
-            }
-        }
-        return false
-    },
-    cacheProducts: function (data) {
-        sessionStorage.setItem("products", data);
-    },
-    getProducts: function () {
-        return sessionStorage.getItem("products");
-    }
-};
+
 
 function FetchData(callBack) {
     let req = new XMLHttpRequest();
@@ -43,7 +26,7 @@ function CreateElement(data, callBack) {
     let card = `
         <div class="col">
             <div class="card">
-                <img src="${data.image}" class="card-img-top" alt="Product image">
+                <img src="${data.image}" class="card-img-top" alt="${data.title}">
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
                         <h1 class="card-title" onclick="getProduct(this)" title="${data.title}" data-target="${data.id}">${data.title}</h1>
@@ -74,62 +57,6 @@ function CreateElement(data, callBack) {
     }
 }
 
-function getCategories() {
-    let req = new XMLHttpRequest();
-
-    req.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            for (let res of JSON.parse(this.response)) {
-                categoriesList.innerHTML += `
-                <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="filterByCategories(this)" data-bs-target="${res}">${res}</a>
-                </li>
-                `
-            }
-        }
-    }
-    req.open("GET", "https://fakestoreapi.com/products/categories");
-    req.send()
-}
-
-function filterByCategories(target) {
-    let req = new XMLHttpRequest();
-    let isRemoved = false;
-    if (cache[target.dataset.bsTarget]) {
-        for (let product of cache[target.dataset.bsTarget]) {
-            CreateElement(product, (card) => {
-                if (isRemoved) {
-                    root.innerHTML += card;
-                } else {
-                    root.innerHTML = card;
-                    isRemoved = true;
-                }
-            })
-        }
-        setRate();
-        return true
-    }
-    req.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            cache[target.dataset.bsTarget] = JSON.parse(this.response);
-
-            for (let product of JSON.parse(this.response)) {
-                CreateElement(product, (card) => {
-                    if (isRemoved) {
-                        root.innerHTML += card;
-                    } else {
-                        root.innerHTML = card;
-                        isRemoved = true;
-                    }
-                })
-            }
-            setRate();
-        }
-    }
-    req.open("GET", `https://fakestoreapi.com/products/category/${target.dataset.bsTarget}`);
-    req.send();
-}
-
 function displayData(data) {
     data = JSON.parse(data);
     for (let p of data) {
@@ -146,13 +73,13 @@ function setRate() {
 }
 
 function toggle(element, query) {
-    if (element.className.includes(query)) {
-        element.classList.remove(query)
-        return true
-    } else {
-        element.classList.add(query)
-        return false
-    }
+     if (element.className.includes(query)) {
+         element.classList.remove(query)
+         return true
+     } else {
+         element.classList.add(query)
+         return false
+     }
 }
 
 function setLove() {
@@ -180,7 +107,7 @@ function slider() {
     toggle(images.shift(), "active");
 }
 
-getCategories();
+// getCategories();
 setInterval(slider, 1500);
 
 function reset() {

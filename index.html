@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined"/>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round" />
     <!-- Bootstrap 5.2 -->
     <link rel="stylesheet" href="static/css/bootstrap.css">
     <link rel="stylesheet" href="static/css/bootstrap-grid.css">
@@ -66,9 +68,11 @@
             cursor: pointer;
             transition: ease-in-out .2s;
         }
+
         .card-title:hover {
             color: darkblue;
         }
+
         .card img {
             min-height: 240px;
             max-height: 240px;
@@ -123,12 +127,12 @@
 
         .search-resault.active {
             display: block;
-            width: 100%;
+            width: calc(100% - 20px);
             background-color: white;
             border-radius: 5px;
             height: auto;
             position: absolute;
-            top: 0;
+            top: 10px;
             z-index: 2;
             margin-top: 4rem;
             transition: ease-in all 0.1s;
@@ -147,11 +151,11 @@
             transition: ease-in all .2s;
         }
 
-        .loading > div {
+        .loading>div {
             height: 100%;
         }
 
-        .loading div > img {
+        .loading div>img {
             position: absolute;
             top: 50%;
             left: calc(50% - 130px);
@@ -189,213 +193,218 @@
                 margin-bottom: 10px;
             }
         }
-
     </style>
     <title>Jenkins</title>
 </head>
-<body>
-<div class="loading">
-    <div class="text-center">
-        <img src="static/images/logo/Light-Logo.svg">
 
-        <div class="spinner-border text-light" role="status">
-            <span class="visually-hidden">Loading...</span>
+<body>
+    <div class="loading">
+        <div class="text-center">
+            <img src="static/images/logo/Light-Logo.svg">
+
+            <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
     </div>
-</div>
-<header class="container-fluid m-0 p-0 navabr-container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="static/images/logo/Light-Logo.svg">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+    <header class="container-fluid m-0 p-0 navabr-container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="static/images/logo/Light-Logo.svg">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
-                <form class="d-flex w-75 mx-3 search-form">
-                    <input id="searchInput" class="form-control me-2" type="search" placeholder="Search"
-                           aria-label="Search">
-                    <div class="search-resault text-bg-light">
-                        <h1 id="seRes" class="fs-4 card-title p-3"></h1>
-                    </div>
-                </form>
-                <div class="d-flex justify-content-between">
-                    <button class="me-3 btn btn-outline-dark text-bg-dark fs-5" data-bs-toggle="modal"
-                            data-bs-target="#SignUp">SignUp
-                    </button>
-                    <button class="btn btn-dark bg-dark text-bg-dark fs-5" type="submit" data-bs-toggle="modal"
-                            data-bs-target="#Login">Login</button>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <section class="slider-container">
-        <div class="slider">
-            <div class="slider-images">
-                <img src="static/images/logo/Dark-Logo.svg" class="active" width="100%" height="500px">
-                <img src="static/images/carousel/1.jpg" class="" width="100%" height="500px">
-                <img src="static/images/carousel/2.jpg" class="" width="100%" height="500px">
-                <img src="static/images/carousel/3.jpg" class="" width="100%" height="500px">
-            </div>
-        </div>
-    </section>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                    </ul>
+                    <form class="m-auto w-100 d-flex search-form p-3">
+                        <input id="searchInput" class="form-control me-2" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <div class="search-resault text-bg-light">
+                            <h1 id="seRes" class="fs-4 card-title p-3"></h1>
+                        </div>
+                    </form>
 
-</header>
-<section class="categories mb-5 mt-5">
-    <header class="container-fluid m-0 p-0 navabr-container ">
-        <nav class="navbar navbar-expand navbar-dark bg-dark">
-            <div class="container">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 m-auto" id="categoriesList">
-                </ul>
+                    <div class="d-flex justify-content-between flex-shrink-0 p-3 align-items-center">
+                        <div>
+                            <button class="btn btn-warning fw-bolder me-2 dropdown-toggle" id="cartItemsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="fs-5">Cart Items</span>
+                                <span class="material-icons-round">
+                                    shopping_cart
+                                </span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="cartItemsDropdown" style="left: auto">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-dark text-bg-dark fs-5" data-bs-toggle="modal"
+                                data-bs-target="#SignUp">SignUp
+                            </button>
+                            <button class="btn btn-dark bg-dark text-bg-dark fs-5" type="submit" data-bs-toggle="modal"
+                                data-bs-target="#Login">Login
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
+        <section class="slider-container">
+            <div class="slider">
+                <div class="slider-images">
+                    <img src="static/images/logo/Dark-Logo.svg" class="active" width="100%" height="500px">
+                    <img src="static/images/carousel/1.jpg" class="" width="100%" height="500px">
+                    <img src="static/images/carousel/2.jpg" class="" width="100%" height="500px">
+                    <img src="static/images/carousel/3.jpg" class="" width="100%" height="500px">
+                </div>
+            </div>
+        </section>
+
     </header>
-</section>
-<!-- Content -->
-<div class="container">
-    <div class="modal fade" id="SignUp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">SignUp</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <section class="categories mb-5 mt-5">
+        <header class="container-fluid m-0 p-0 navabr-container ">
+            <nav class="navbar navbar-expand navbar-dark bg-dark">
+                <div class="container">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 m-auto" id="categoriesList">
+                    </ul>
                 </div>
-                <div class="modal-body">
-                    <form class="row g-3 needs-validation" novalidate name="signupForm">
-                        <div class="col-md-4">
-                            <label for="fname" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="fname" value="" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="lname" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="lname" value="" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="username" class="form-label">Username</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                <input type="text" class="form-control" id="username"
-                                       aria-describedby="inputGroupPrepend" required>
-                                <div class="invalid-feedback">
-                                    Please choose a username.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="password1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password1" required>
-                            <div class="invalid-feedback">
-                                Please provide a valid Password.
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="password2" class="form-label">Retype Password</label>
-                            <input type="password" class="form-control" id="password2" required>
-                            <div class="invalid-feedback">
-                                Password not match.
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">SignUp</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="Login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginBackdropLabel">Login</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="row g-3 needs-validation" novalidate name="loginForm">
-                        <div class="col-md-12">
-                            <label for="usernameLogin" class="form-label">Username</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text" id="loginInfo">@</span>
-                                <input type="text" class="form-control" id="usernameLogin"
-                                       aria-describedby="loginInfo" required>
-                                <div class="invalid-feedback">
-                                    Please choose a username.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="passwordLogin" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="passwordLogin" required>
-                            <div class="invalid-feedback">
-                                Please provide a valid Password.
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">SignUp</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Products -->
-    <section id="root">
-
+            </nav>
+        </header>
     </section>
-    <!--end Products -->
-</div>
+    <!-- Content -->
+    <div class="container">
+        <div class="modal fade" id="SignUp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">SignUp</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" novalidate name="signupForm">
+                            <div class="col-md-4">
+                                <label for="fname" class="form-label">First name</label>
+                                <input type="text" class="form-control" id="fname" value="" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="lname" class="form-label">Last name</label>
+                                <input type="text" class="form-control" id="lname" value="" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="username" class="form-label">Username</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                    <input type="text" class="form-control" id="username"
+                                        aria-describedby="inputGroupPrepend" required>
+                                    <div class="invalid-feedback">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password1" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password1" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid Password.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password2" class="form-label">Retype Password</label>
+                                <input type="password" class="form-control" id="password2" required>
+                                <div class="invalid-feedback">
+                                    Password not match.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">SignUp</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- Script -->
-<script src="static/js/bootstrap.bundle.js"></script>
-<!-- Main JS -->
-<script src="static/js/jenkins.main.js"></script>
-<script src="static/js/jenkins.details.js"></script>
-<script src="static/js/jenkins.auth.js"></script>
-<script src="static/js/jenkins.events.js"></script>
+        <div class="modal fade" id="Login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginBackdropLabel">Login</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" novalidate name="loginForm">
+                            <div class="col-md-12">
+                                <label for="usernameLogin" class="form-label">Username</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text" id="loginInfo">@</span>
+                                    <input type="text" class="form-control" id="usernameLogin"
+                                        aria-describedby="loginInfo" required>
+                                    <div class="invalid-feedback">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="passwordLogin" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="passwordLogin" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid Password.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">SignUp</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products -->
+        <section id="root">
+
+        </section>
+        <!--end Products -->
+    </div>
+
+    <!-- Script -->
+    <script src="static/js/bootstrap.bundle.js"></script>
+    <!-- Main JS -->
+    <script src="static/js/jenkins.main.js"></script>
+    <script src="static/js/jenkins.categories.js"></script>
+    <script src="static/js/jenkins.details.js"></script>
+    <script src="static/js/jenkins.auth.js"></script>
+    <script src="static/js/jenkins.events.js"></script>
+    <script src="static/js/jenkins.cache.js"></script>
 </body>
+
 </html>
