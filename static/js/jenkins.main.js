@@ -41,7 +41,7 @@ function CreateElement(data, callBack) {
                         <p class="card-text lh-base fs-4">${data.description}</p>
                         <div class="product-action d-flex align-items-center justify-content-between">
                             <span><strong class="">Price:</strong><span
-                                class="badge text-bg-light text-success mx-3">${data.price}$</span></span>
+                                class="badge text-bg-light text-success mx-1">${data.price}$</span></span>
                             <button class="btn btn-dark bg-text-dark">Add to Cart</button>
                         </div>
                     </div>

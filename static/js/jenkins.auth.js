@@ -12,13 +12,17 @@ if (!localStorage.getItem("id")) {
 (() => {
     'use strict'
     Array.from(loginform).forEach(form => {
-
         form.addEventListener('submit', event => {
             event.preventDefault()
             if (!form.checkValidity()) {
                 event.stopPropagation()
             }
-            login();
+            console.log({username:form.usernameLogin.value, password: form.passwordLogin.value})
+            let user = User.login({username:form.usernameLogin.value, password: form.passwordLogin.value});
+            console.log(user)
+            if (user) {
+                userInfo.innerHTML = user.username;
+            }
             form.classList.add('was-validated')
         }, false)
     })
@@ -61,24 +65,11 @@ function newUser(form) {
         lname: form.lname.value,
         username: form.username.value,
     };
-    console.log(form)
     let user = new User(userForm);
     user.newPassword(form._password.value);
     user.save();
-//    let obj = JSON.parse(localStorage.getItem("users"))
-//    obj[obj.length] = user;
-//    localStorage.setItem("users", JSON.stringify(obj))
 }
 
-function login() {
-    let loginInfo = {username: usernameLogin.value, password:passwordLogin.value};
-    let data = JSON.parse(localStorage.getItem("users"));
-    for (user of data) {
-        if (user.username == loginInfo.username && user.password == loginInfo.password) {
-            console.log(user);
-        }
-    }
-}
 
 //user = new User({fname:"islam", lname:"kamel", username:"islam.kamel"})
 class User {
@@ -124,11 +115,12 @@ class User {
                 return new User(user);
             }
         }
+        return false;
     }
     save() {
-        let obj = JSON.parse(localStorage.getItem("users"))
+        let obj = JSON.parse(localStorage.getItem("users"));
         obj[obj.length] = this;
-        localStorage.setItem("users", JSON.stringify(obj))
+        localStorage.setItem("users", JSON.stringify(obj));
     }
 
 }
