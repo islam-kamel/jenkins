@@ -71,4 +71,5 @@ function showDetails(data) {
     root.className = "row";
     root.innerHTML = card;
     setRate();
+    setLove();
 }

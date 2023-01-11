@@ -120,7 +120,8 @@ class User {
     save() {
         let obj = JSON.parse(localStorage.getItem("users"));
         obj[obj.length] = this;
-        localStorage.setItem("users", JSON.stringify(obj));
+        saveLocalStorage("users", JSON.stringify(obj));
+//        localStorage.setItem("users", JSON.stringify(obj));
     }
 
 }
