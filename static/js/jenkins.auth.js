@@ -6,13 +6,25 @@ if (!localStorage.getItem("users")) {
     localStorage.setItem("users", "[]");
 }
 
-
-
 function loginError() {
     let error = document.querySelector("#loginForm > .invalid-feedback");
     error.classList.add("d-block");
 }
 
+function logout() {
+    removeItemFromLocalStorage("login");
+    window.location.reload();
+}
+function displayLoginInfo() {
+    try {
+        let {username} = getItemFromLocalStorage("login");
+        userInfo.innerHTML = "@"+username;
+        userInfo.innerHTML += `<button onclick="logout()" class="btn btn-dark mx-3">Logout</button>`
+    } catch (e) {
+        
+    }
+
+}
 loginform.addEventListener("submit", (e) => {
     e.preventDefault();
     let login = User.login({username: loginform.usernameLogin.value, password: loginform.passwordLogin.value});
@@ -22,14 +34,13 @@ loginform.addEventListener("submit", (e) => {
     }
     loginform.classList.add('was-validated');
     if (login) {
-        userInfo.innerHTML = "@"+loginform.usernameLogin.value;
-        document.querySelector("#loginForm > div.col-12 > div > button.btn.btn-secondary").click();
         saveLocalStorage("login", JSON.stringify({username: login.username}))
+        displayLoginInfo();
+        window.location.reload();
+        document.querySelector("#loginForm > div.col-12 > div > button.btn.btn-secondary").click();
     } else {
         loginError();
     }
-
-
 })
 
 signform.addEventListener("submit", (e) => {
@@ -62,35 +73,7 @@ function newUser(form) {
     return create.save();
 }
 
-class ProductRatings {
-    #ratings;
-    constructor() {
-        this.#ratings = {};
-        this.ratings = this.getAll();
-    }
-
-    setRating(username, productId, rating) {
-        let products = this.#ratings[username];
-        if (products === undefined) {
-            return this.#ratings[username] = JSON.parse(`{
-                "${productId}": ${rating}
-            }`);
-        }
-        return this.#ratings[username][productId] = rating;
-    }
-
-    getAll() {
-        return this.#ratings;
-    }
-
-    remove(username, productId) {
-        let ratings = this.getAll(username);
-        delete ratings[username][productId];
-        this.#ratings[username] = ratings[username];
-    }
-
-}
-class LovedProducts {
+class LovedPorducts {
     #products;
     constructor(products = false) {
         this.#products = products ? products : {};
@@ -117,10 +100,6 @@ class LovedProducts {
         return this.#products;
     }
 }
-
-window.addEventListener("loved", () => {
-    user.update();
-})
 
 class User {
 
@@ -202,13 +181,18 @@ class User {
 }
 
 function setUserLove() {
-    let user = User.getUser(User.getCurrentUser().username);
-    let loved = user.lovedProducts.getAll();
-    for (let product of loved[user.username]) {
-        let love = document.querySelector(`.love[data-product-id="${product}"]`);
-        love.innerText = "favorite";
-        love.classList.add("loved");
+    try {
+        let user = User.getUser(User.getCurrentUser().username);
+        let loved = user.lovedProducts.getAll();
+        for (let product of loved[user.username]) {
+            let love = document.querySelector(`.love[data-product-id="${product}"]`);
+            love.innerText = "favorite";
+            love.classList.add("loved");
+        }
+    } catch (e) {
+
     }
+
 }
 
 (() => {
@@ -220,4 +204,3 @@ function setUserLove() {
         })
     }
 })()
-//user = new User({fname:"islam", lname:"kamel", username:"islam.kamel"})

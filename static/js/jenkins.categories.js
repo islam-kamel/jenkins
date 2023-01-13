@@ -6,7 +6,7 @@ function getCategories() {
             for (let res of JSON.parse(this.response)) {
                 categoriesList.innerHTML += `
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="filterByCategories(this)" data-bs-target="${res}">${res}</a>
+                    <a class="nav-link" href="#root" onclick="filterByCategories(this)" data-bs-target="${res}">${res}</a>
                 </li>
                 `
             }
@@ -30,7 +30,6 @@ function filterByCategories(target) {
                 }
             })
         }
-        setRate();
         return true
     }
     req.onreadystatechange = function () {
@@ -48,6 +47,9 @@ function filterByCategories(target) {
                 })
             }
             setRate();
+            renderLove();
+            setUserLove();
+
         }
     }
     req.open("GET", `https://fakestoreapi.com/products/category/${target.dataset.bsTarget}`);

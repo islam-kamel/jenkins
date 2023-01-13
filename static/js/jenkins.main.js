@@ -1,8 +1,6 @@
 let images = Array.from(document.querySelectorAll(".slider-container .slider .slider-images img"));
 let lodaingArea = document.querySelector(".loading");
 
-
-
 function FetchData(callBack) {
     let req = new XMLHttpRequest();
     let cacheResualt = cache.getProducts();
@@ -24,7 +22,7 @@ function FetchData(callBack) {
 
 function CreateElement(data, callBack) {
     let card = `
-        <div class="col">
+        <div class="col" data-product=${data.id}>
             <div class="card">
                 <img src="${data.image}" class="card-img-top" alt="${data.title}">
                 <div class="card-body">
@@ -67,9 +65,12 @@ function displayData(data) {
 function setRate() {
     let stars = document.querySelectorAll('.star-rate');
     for (let star of stars) {
-        star.innerHTML += '<i class="material-icons-outlined rated">star</i>'.repeat(+star.getAttribute("rating"))
-        star.innerHTML += '<i class="material-icons-outlined">star_border</i>'.repeat(5 - +star.getAttribute("rating"))
+        if (star.childNodes.length < 4) {
+            star.innerHTML += '<i class="material-icons-outlined rated">star</i>'.repeat(+star.getAttribute("rating"))
+            star.innerHTML += '<i class="material-icons-outlined">star_border</i>'.repeat(5 - +star.getAttribute("rating"))
+        }
     }
+    return stars
 }
 
 function toggle(element, query) {
@@ -82,25 +83,25 @@ function toggle(element, query) {
      }
 }
 
-let user =  User.getUser(User.getCurrentUser().username);
-
 function renderLove() {
-    let loves = document.querySelectorAll(".love");
+    try {
+        let loves = document.querySelectorAll(".love");
+        let user =  User.getUser(User.getCurrentUser().username);
+        for (let love of loves) {
+            love.addEventListener("click", (e) => {
+                if (toggle(e.target, "loved")) {
+                    e.target.innerText = "favorite_border";
+                    user.lovedProducts.unlove(user.username, +e.target.dataset.productId);
+                } else {
+                    e.target.innerText = "favorite"
+                    user.lovedProducts.love(user.username, +e.target.dataset.productId);
+                }
+                user.update();
+            })
+        }
+    } catch (e) {
 
-    for (let love of loves) {
-        love.addEventListener("click", (e) => {
-            if (toggle(e.target, "loved")) {
-                e.target.innerText = "favorite_border";
-                user.lovedProducts.unloved(user.username, +e.target.dataset.productId);
-                window.dispatchEvent(loved);
-            } else {
-                e.target.innerText = "favorite"
-                user.lovedProducts.love(user.username, +e.target.dataset.productId);
-                window.dispatchEvent(loved);
-            }
-        })
     }
-
 }
 
 function slider() {
@@ -114,12 +115,8 @@ function slider() {
     toggle(images.shift(), "active");
 }
 
-// getCategories();
 setInterval(slider, 1500);
 
 function reset() {
-    root.innerHTML = "";
-    FetchData(displayData);
-    setRate();
-    renderLove();
+    window.location.reload();
 }

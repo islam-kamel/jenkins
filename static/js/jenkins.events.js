@@ -1,9 +1,8 @@
 const fetched = new Event("fetched");
-const loved = new Event("loved");
 
 window.onload = function () {
+    displayLoginInfo();
     FetchData(displayData);
-    getCategories();
 }
 
 window.addEventListener("fetched", () => {
@@ -11,7 +10,9 @@ window.addEventListener("fetched", () => {
     setTimeout(() => {
         lodaingArea.style.display = "none";
         }, 250);
-
+    
+    getCategories();
+    getLatestView();
     setRate();
     renderLove();
 })
@@ -24,6 +25,7 @@ searchInput.addEventListener("input", (e) => {
         return false;
     }
     seRes.innerText = product.title;
+    seRes.setAttribute("data-product-id", product.id)
     seRes.parentNode.classList.add("active");
-    seRes.addEventListener("click", e => getProduct(e.target));
+    seRes.addEventListener("click", e => getProduct(e.target.dataset.productId));
 })

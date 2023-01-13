@@ -16,217 +16,15 @@
     <link rel="stylesheet" href="static/css/bootstrap-grid.css">
     <!-- Main Css -->
     <link rel="stylesheet" href="static/css/jenkins.main.css">
-    <style>
-        .categories {
-            position: -webkit-sticky;
-            position: sticky !important;
-            z-index: 2;
-            top: -1px !important;
-        }
-
-        .love {
-            cursor: pointer;
-        }
-
-        .slider-container {
-            margin-bottom: 510px;
-        }
-
-        .slider {
-            position: relative;
-        }
-
-        .slider .slider-images img {
-            position: absolute;
-            opacity: 0;
-            z-index: 1;
-            transition: ease-in opacity 0.3s;
-        }
-
-        .slider .slider-images img.active {
-            opacity: 1;
-        }
-
-        .navbar-brand img {
-            width: 9rem;
-        }
-
-        .navbar {
-            z-index: 9999;
-        }
-
-        .bg-dark {
-            background-color: black !important;
-            color: white;
-        }
-
-        .card-title {
-            white-space: nowrap;
-            overflow: hidden;
-            width: 90%;
-            text-overflow: ellipsis;
-            cursor: pointer;
-            transition: ease-in-out .2s;
-        }
-
-        .card-title:hover {
-            color: darkblue;
-        }
-
-        .card img {
-            min-height: 240px;
-            max-height: 240px;
-            object-fit: contain;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-
-        .card img:hover {
-            box-shadow: 0 2px gold;
-            transform: scale(0.9);
-            transition: ease-out all 0.2s;
-        }
-
-        .card .product-desc p {
-            display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-
-        .product-action * {
-            font-size: 120%;
-        }
-
-        .rated {
-            color: gold;
-        }
-
-        .loved {
-            color: red;
-            transition: ease-in color 0.2s;
-        }
-
-        #root div:nth-child(even) {
-            margin-bottom: 10px;
-        }
-
-        .navabr-container * {
-            font-size: 1.5rem;
-        }
-
-        .search-form {
-            flex-direction: column;
-            position: relative;
-        }
-
-        .search-resault {
-            display: none;
-        }
-
-        .search-resault.active {
-            display: block;
-            width: calc(100% - 20px);
-            background-color: white;
-            border-radius: 5px;
-            height: auto;
-            position: absolute;
-            top: 10px;
-            z-index: 2;
-            margin-top: 4rem;
-            transition: ease-in all 0.1s;
-        }
-
-        .search-resault h1 {
-            cursor: pointer;
-        }
-
-        .loading {
-            background-color: black;
-            width: 100%;
-            z-index: 9999999999999;
-            position: absolute;
-            height: 100%;
-            transition: ease-in all .2s;
-        }
-
-        .loading > div {
-            height: 100%;
-        }
-
-        .loading div > img {
-            position: absolute;
-            top: 50%;
-            left: calc(50% - 130px);
-            width: 100px;
-        }
-
-        .loading img,
-        .loading .spinner-border {
-            position: absolute;
-            top: calc(50% + 3px);
-        }
-
-        .loading .spinner-border {
-            left: calc(50% - 16px);
-            font-size: 12px;
-            height: 1.5rem;
-            width: 1.5rem;
-        }
-
-        .loading.loaded {
-            opacity: 0;
-        }
-
-        .slider-container {
-            transform: translateY(0);
-            transition: ease-in all .2s;
-        }
-
-        .slider-hidden {
-            transform: translateY(-500px);
-        }
-
-        #cartItems img {
-            max-width: 50px;
-        }
-        #cartItems h1 {
-            white-space: normal;
-            font-size: 1.3rem;
-        }
-        #cartItems {
-            margin-right: 1%;
-            z-index: 3;
-            max-height: 50vh;
-            overflow-y: auto;
-
-        }
-        .checkout {
-            width: 60px;
-            height: 60px;
-            top: 50vh !important;
-            right: 1%;
-        }
-        .footer {
-            background: #c7c7c733;
-            margin-top: 5%;
-        }
-        @media only screen and (max-width: 760px) {
-            #root div:nth-child(odd) {
-                margin-bottom: 10px;
-            }
-        }
-    </style>
+    <link rel="icon" href="static/images/logo/icon.ico">
     <title>Jenkins</title>
 </head>
-
 <body>
 <div class="loading">
-    <div class="text-center">
-        <img src="static/images/logo/Light-Logo.svg">
+    <div class="d-flex justify-content-center align-items-center h-100">
+        <img class="flex-shrink-0" src="static/images/logo/Light-Logo.svg">
 
-        <div class="spinner-border text-light" role="status">
+        <div class="spinner-border text-light flex-shrink-0" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
@@ -234,7 +32,7 @@
 <header class="container-fluid m-0 p-0 navabr-container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#" onclick="reset()">
                 <img src="static/images/logo/Light-Logo.svg">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -245,7 +43,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="#" onclick="reset()">Home</a>
                     </li>
                 </ul>
                 <form class="m-auto w-100 d-flex search-form p-3">
@@ -269,8 +67,8 @@
 
                         </ul>
                     </div>
-                    <div id="userInfo">
-                        <button class="btn btn-outline-dark text-bg-dark fs-5" data-bs-toggle="modal"
+                    <div id="userInfo" class="d-flex align-items-center justify-content-between">
+                        <button class="btn btn-outline-dark text-bg-dark fs-5 mx-3" data-bs-toggle="modal"
                                 data-bs-target="#SignUp">SignUp
                         </button>
                         <button class="btn btn-dark bg-dark text-bg-dark fs-5" type="submit" data-bs-toggle="modal"
@@ -470,7 +268,7 @@
             </div>
 
             <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                <p>© 2022 Company, Inc. All rights reserved.</p>
+                <p>© 2023 Jekins Store, Inc. All rights reserved.</p>
                 <ul class="list-unstyled d-flex">
                     <li class="ms-3"><a class="link-dark" href="#">
                         <svg class="bi" width="24" height="24">
@@ -504,6 +302,7 @@
 <script src="static/js/jenkins.details.js"></script>
 <script src="static/js/jenkins.auth.js"></script>
 <script src="static/js/jenkins.cart.js"></script>
+<script src="static/js/jenkis.tracking.js"></script>
 </body>
 
 </html>

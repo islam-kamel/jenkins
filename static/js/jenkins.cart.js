@@ -158,7 +158,7 @@ function checkOutPage() {
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
                         <h1 class="card-title" onclick="getProduct(${products[key].id})" title="${products[key].title}" data-target="${products[key].id}">${products[key].title}</h1>
-                        <i class="material-icons-outlined love" data-product-id="${data.id}">favorite_border</i>
+                        <i class="material-icons-outlined love" data-product-id="${products[key].id}">favorite_border</i>
                     </div>
                     <div class="seller-info d-flex flex-column align-items-start mb-2">
                         <div class="star-rate" rating="${Math.round(products[key].rating.rate)}">
@@ -191,7 +191,6 @@ function checkOutPage() {
         </div>
         `
     }
-    console.log(elements)
     root.className = "row row-cols-1";
     root.innerHTML = elements;
     root.innerHTML += checkout;
@@ -202,4 +201,5 @@ function checkOutPage() {
     `
     setRate();
     renderLove();
+    setUserLove();
 }
