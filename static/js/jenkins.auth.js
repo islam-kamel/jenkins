@@ -83,14 +83,14 @@ class ProductRatings {
         return this.#ratings;
     }
 
-    remove(username, prodeuctId) {
+    remove(username, productId) {
         let ratings = this.getAll(username);
-        delete ratings[username][prodeuctId];
+        delete ratings[username][productId];
         this.#ratings[username] = ratings[username];
     }
 
 }
-class LovedPorducts {
+class LovedProducts {
     #products;
     constructor(products = false) {
         this.#products = products ? products : {};
@@ -105,7 +105,7 @@ class LovedPorducts {
         return this.#products[username] = products;
     }
 
-    unlove(username, productId) {
+    unloved(username, productId) {
         let products = this.#products[username];
         products = products.filter((id) => {
             return id !== productId;
@@ -128,7 +128,7 @@ class User {
         this.fname = data.fname;
         this.lname = data.lname;
         this.username = data.username;
-        this.lovedProducts = new LovedPorducts();
+        this.lovedProducts = new LovedProducts();
         this._password = "";
 
     }
@@ -153,7 +153,7 @@ class User {
         for(let user of users) {
             if (user.username === username) {
                 let obj  = new User(user);
-                obj.lovedProducts = new LovedPorducts(user.lovedProducts);
+                obj.lovedProducts = new LovedProducts(user.lovedProducts);
                 return obj
             }
         }
@@ -171,7 +171,7 @@ class User {
     static getCurrentUser() {
         return getItemFromLocalStorage("login");
     }
-    #vaildUser() {
+    #validUser() {
         let users = getItemFromLocalStorage("users");
         for (let user of users) {
             if (user.username === this.username) {
@@ -191,7 +191,7 @@ class User {
     }
     save() {
         let obj = JSON.parse(localStorage.getItem("users"));
-        if (this.#vaildUser()) {
+        if (this.#validUser()) {
             obj[obj.length] = this;
             saveLocalStorage("users", JSON.stringify(obj));
             return this;

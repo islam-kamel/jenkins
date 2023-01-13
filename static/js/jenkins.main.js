@@ -81,7 +81,9 @@ function toggle(element, query) {
          return false
      }
 }
+
 let user =  User.getUser(User.getCurrentUser().username);
+
 function renderLove() {
     let loves = document.querySelectorAll(".love");
 
@@ -89,7 +91,7 @@ function renderLove() {
         love.addEventListener("click", (e) => {
             if (toggle(e.target, "loved")) {
                 e.target.innerText = "favorite_border";
-                user.lovedProducts.unlove(user.username, +e.target.dataset.productId);
+                user.lovedProducts.unloved(user.username, +e.target.dataset.productId);
                 window.dispatchEvent(loved);
             } else {
                 e.target.innerText = "favorite"
