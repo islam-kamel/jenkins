@@ -6,7 +6,7 @@ function getCategories() {
             for (let res of JSON.parse(this.response)) {
                 categoriesList.innerHTML += `
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="filterByCategories(this)" data-bs-target="${res}">${res}</a>
+                    <a class="nav-link" href="#root" onclick="filterByCategories(this)" data-bs-target="${res}">${res}</a>
                 </li>
                 `
             }
