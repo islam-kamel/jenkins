@@ -273,6 +273,7 @@
         </div>
     </section>
 </header>
+
 <section class="categories mb-5 mt-5">
     <header class="container-fluid m-0 p-0 navabr-container ">
         <nav class="navbar navbar-expand navbar-dark bg-dark">
@@ -285,7 +286,7 @@
 </section>
 
 <div class="container">
-<div class="modal fade" id="SignUp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="SignUp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -294,7 +295,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3 needs-validation" novalidate name="signupForm">
+                    <form class="row g-3 needs-validation" novalidate id="signupForm">
                         <div class="col-md-4">
                             <label for="fname" class="form-label">First name</label>
                             <input type="text" class="form-control" id="fname" value="" required>
@@ -357,24 +358,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3 needs-validation" novalidate name="loginForm">
+
+                    <form class="row g-3 needs-validation" novalidate id="loginForm">
+                        <div class="invalid-feedback text-center">
+                            Please choose a username.
+                        </div>
                         <div class="col-md-12">
                             <label for="usernameLogin" class="form-label">Username</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text" id="loginInfo">@</span>
                                 <input type="text" class="form-control" id="usernameLogin"
                                        aria-describedby="loginInfo" required>
-                                <div class="invalid-feedback">
-                                    Please choose a username.
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <label for="passwordLogin" class="form-label">Password</label>
                             <input type="password" class="form-control" id="passwordLogin" required>
-                            <div class="invalid-feedback">
-                                Please provide a valid Password.
-                            </div>
                         </div>
 
                         <div class="col-12">
@@ -391,6 +390,7 @@
         </div>
     </div>
 </div>
+
 <!-- Content -->
 <div class="container">
     <!-- Products -->
