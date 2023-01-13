@@ -1,5 +1,6 @@
 const fetched = new Event("fetched");
 const loved = new Event("loved");
+const viewd = new Event("viewd");
 
 window.onload = function () {
     FetchData(displayData);

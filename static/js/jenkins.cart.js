@@ -191,7 +191,6 @@ function checkOutPage() {
         </div>
         `
     }
-    console.log(elements)
     root.className = "row row-cols-1";
     root.innerHTML = elements;
     root.innerHTML += checkout;

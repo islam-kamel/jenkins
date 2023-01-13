@@ -7,6 +7,8 @@ function getProduct(target, callBack) {
                 return callBack(this.response);
             }
             showDetails(this.response);
+//            window.dispatchEvent(viewd);
+            latestView(this.response)
         }
     }
 
@@ -14,9 +16,7 @@ function getProduct(target, callBack) {
     req.send();
 }
 
-function getRecommentaions() {
 
-}
 
 function hiddenSlider() {
     let slider = document.querySelector(".slider-container");
