@@ -1,13 +1,16 @@
-function getProduct(target) {
+function getProduct(target, callBack) {
     let req = new XMLHttpRequest();
 
     req.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
+            if(callBack){
+                return callBack(this.response);
+            }
             showDetails(this.response);
         }
     }
 
-    req.open("GET", `https://fakestoreapi.com/products/${target.dataset.target}`);
+    req.open("GET", `https://fakestoreapi.com/products/${target}`);
     req.send();
 }
 
@@ -71,5 +74,5 @@ function showDetails(data) {
     root.className = "row";
     root.innerHTML = card;
     setRate();
-    setLove();
+    renderLove();
 }

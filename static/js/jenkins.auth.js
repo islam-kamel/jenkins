@@ -1,14 +1,12 @@
 const signform = document.forms.signupForm;
 const loginform = document.forms.loginForm;
-
 const data = JSON.parse(localStorage.getItem("users"));
 
 if (!localStorage.getItem("users")) {
     localStorage.setItem("users", "[]");
 }
-if (!localStorage.getItem("id")) {
-    localStorage.setItem("id", 0);
-}
+
+
 
 function loginError() {
     let error = document.querySelector("#loginForm > .invalid-feedback");
@@ -26,7 +24,7 @@ loginform.addEventListener("submit", (e) => {
     if (login) {
         userInfo.innerHTML = "@"+loginform.usernameLogin.value;
         document.querySelector("#loginForm > div.col-12 > div > button.btn.btn-secondary").click();
-        saveLocalStorage("login", `{username: ${login.username}}`)
+        saveLocalStorage("login", JSON.stringify({username: login.username}))
     } else {
         loginError();
     }
@@ -68,6 +66,7 @@ class ProductRatings {
     #ratings;
     constructor() {
         this.#ratings = {};
+        this.ratings = this.getAll();
     }
 
     setRating(username, productId, rating) {
@@ -89,11 +88,12 @@ class ProductRatings {
         delete ratings[username][prodeuctId];
         this.#ratings[username] = ratings[username];
     }
+
 }
 class LovedPorducts {
     #products;
-    constructor() {
-        this.#products = {};
+    constructor(products = false) {
+        this.#products = products ? products : {};
     }
 
     love(username, productId) {
@@ -107,11 +107,10 @@ class LovedPorducts {
 
     unlove(username, productId) {
         let products = this.#products[username];
-        let index = products.indexOf(productId);
-        if (index > -1) {
-            products.pop(products.indexOf(productId));
-            return this.#products[username] = products;
-        }
+        products = products.filter((id) => {
+            return id !== productId;
+        })
+        return this.#products[username] = products;
     }
 
     getAll() {
@@ -119,14 +118,19 @@ class LovedPorducts {
     }
 }
 
+window.addEventListener("loved", () => {
+    user.update();
+})
+
 class User {
+
     constructor(data) {
         this.fname = data.fname;
         this.lname = data.lname;
         this.username = data.username;
         this.lovedProducts = new LovedPorducts();
-        this.productRatings = new ProductRatings();
         this._password = "";
+
     }
 
     static hashPassword(password){
@@ -148,7 +152,9 @@ class User {
         let users = JSON.parse(localStorage.getItem("users"));
         for(let user of users) {
             if (user.username === username) {
-                return new User(user);
+                let obj  = new User(user);
+                obj.lovedProducts = new LovedPorducts(user.lovedProducts);
+                return obj
             }
         }
     }
@@ -162,6 +168,9 @@ class User {
         return false;
     }
 
+    static getCurrentUser() {
+        return getItemFromLocalStorage("login");
+    }
     #vaildUser() {
         let users = getItemFromLocalStorage("users");
         for (let user of users) {
@@ -171,7 +180,15 @@ class User {
         }
         return true;
     }
-
+    update() {
+        let users = getItemFromLocalStorage("users");
+        for (let user of users) {
+            if(user.username === this.username) {
+                user.lovedProducts = this.lovedProducts.getAll();
+                saveLocalStorage("users", JSON.stringify(users));
+            }
+        }
+    }
     save() {
         let obj = JSON.parse(localStorage.getItem("users"));
         if (this.#vaildUser()) {
@@ -183,4 +200,24 @@ class User {
     }
 
 }
+
+function setUserLove() {
+    let user = User.getUser(User.getCurrentUser().username);
+    let loved = user.lovedProducts.getAll();
+    for (let product of loved[user.username]) {
+        let love = document.querySelector(`.love[data-product-id="${product}"]`);
+        love.innerText = "favorite";
+        love.classList.add("loved");
+    }
+}
+
+(() => {
+    let login = getItemFromLocalStorage("login");
+    if (login) {
+        userInfo.innerHTML = "@"+login.username;
+        window.addEventListener("fetched", () => {
+            setUserLove();
+        })
+    }
+})()
 //user = new User({fname:"islam", lname:"kamel", username:"islam.kamel"})

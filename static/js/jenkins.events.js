@@ -1,4 +1,5 @@
 const fetched = new Event("fetched");
+const loved = new Event("loved");
 
 window.onload = function () {
     FetchData(displayData);
@@ -12,7 +13,7 @@ window.addEventListener("fetched", () => {
         }, 250);
 
     setRate();
-    setLove();
+    renderLove();
 })
 
 searchInput.addEventListener("input", (e) => {

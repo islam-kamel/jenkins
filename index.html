@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="static/css/jenkins.main.css">
     <style>
         .categories {
-            z-index: 9999;
+            z-index: 2;
             position: sticky !important;
             position: -webkit-sticky;
             top: -1px !important;
@@ -188,6 +188,30 @@
             transform: translateY(-500px);
         }
 
+        #cartItems img {
+            max-width: 50px;
+        }
+        #cartItems h1 {
+            white-space: normal;
+            font-size: 1.3rem;
+        }
+        #cartItems {
+            margin-right: 1%;
+            z-index: 3;
+            max-height: 50vh;
+            overflow-y: auto;
+
+        }
+        .checkout {
+            width: 60px;
+            height: 60px;
+            top: 50vh !important;
+            right: 1%;
+        }
+        .footer {
+            background: #c7c7c733;
+            margin-top: 5%;
+        }
         @media only screen and (max-width: 760px) {
             #root div:nth-child(odd) {
                 margin-bottom: 10px;
@@ -241,13 +265,8 @@
                                     shopping_cart
                                 </span>
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="cartItemsDropdown" style="left: auto">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="cartItemsDropdown" style="left: auto" id="cartItems">
+
                         </ul>
                     </div>
                     <div id="userInfo">
@@ -400,7 +419,7 @@
 </div>
 
 <!--footer-->
-<div class="container-fluid">
+<div class="container-fluid border-top footer">
     <div class="container">
         <footer class="py-5">
             <div class="row">
@@ -477,13 +496,14 @@
 <!-- Script -->
 <script src="static/js/bootstrap.bundle.js"></script>
 <!-- Main JS -->
-<script src="static/js/jenkins.main.js"></script>
 <script src="static/js/jenkins.categories.js"></script>
-<script src="static/js/jenkins.details.js"></script>
-<script src="static/js/jenkins.auth.js"></script>
+<script src="static/js/jenkins.storage.js"></script>
 <script src="static/js/jenkins.events.js"></script>
 <script src="static/js/jenkins.cache.js"></script>
-<script src="static/js/jenkins.storage.js"></script>
+<script src="static/js/jenkins.main.js" defer></script>
+<script src="static/js/jenkins.details.js"></script>
+<script src="static/js/jenkins.auth.js"></script>
+<script src="static/js/jenkins.cart.js"></script>
 </body>
 
 </html>

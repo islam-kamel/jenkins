@@ -29,8 +29,8 @@ function CreateElement(data, callBack) {
                 <img src="${data.image}" class="card-img-top" alt="${data.title}">
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h1 class="card-title" onclick="getProduct(this)" title="${data.title}" data-target="${data.id}">${data.title}</h1>
-                        <i class="material-icons-outlined love">favorite_border</i>
+                        <h1 class="card-title" onclick="getProduct(${data.id})" title="${data.title}" data-target="${data.id}">${data.title}</h1>
+                        <i class="material-icons-outlined love" data-product-id="${data.id}">favorite_border</i>
                     </div>
                     <div class="seller-info d-flex flex-column align-items-start mb-2">
                         <div class="star-rate" rating="${Math.round(data.rating.rate)}">
@@ -42,7 +42,7 @@ function CreateElement(data, callBack) {
                         <div class="product-action d-flex align-items-center justify-content-between">
                             <span><strong class="">Price:</strong><span
                                 class="badge text-bg-light text-success mx-1">${data.price}$</span></span>
-                            <button class="btn btn-dark bg-text-dark">Add to Cart</button>
+                            <button class="btn btn-dark bg-text-dark" onclick="getProduct(${data.id}, addItems)">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -81,19 +81,24 @@ function toggle(element, query) {
          return false
      }
 }
-
-function setLove() {
+let user =  User.getUser(User.getCurrentUser().username);
+function renderLove() {
     let loves = document.querySelectorAll(".love");
 
     for (let love of loves) {
         love.addEventListener("click", (e) => {
             if (toggle(e.target, "loved")) {
-                e.target.innerText = "favorite_border"
+                e.target.innerText = "favorite_border";
+                user.lovedProducts.unlove(user.username, +e.target.dataset.productId);
+                window.dispatchEvent(loved);
             } else {
                 e.target.innerText = "favorite"
+                user.lovedProducts.love(user.username, +e.target.dataset.productId);
+                window.dispatchEvent(loved);
             }
         })
     }
+
 }
 
 function slider() {
@@ -114,5 +119,5 @@ function reset() {
     root.innerHTML = "";
     FetchData(displayData);
     setRate();
-    setLove();
+    renderLove();
 }
