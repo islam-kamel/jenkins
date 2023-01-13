@@ -21,7 +21,7 @@ function buildContainer(title) {
             <div class="text-center border-bottom mb-3">
                 <h2 class="w-fit text-center mt-5 bg-dark p-3">${title}</h2>
             </div>
-            <div id="autoGenerate" class="row row-cols-3 row-cols-sm-1 g-4 d-flex flex-nowrap" style="max-width: 100%; overflow-x: auto">
+            <div id="autoGenerate" class="row row-cols-md-3 row-cols-sm-1 g-4 d-flex flex-nowrap" style="max-width: 100%; overflow-x: auto">
             </div>
         `
 }
