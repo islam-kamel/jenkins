@@ -84,24 +84,27 @@ function toggle(element, query) {
          return false
      }
 }
+
 function renderLove() {
-    let loves = document.querySelectorAll(".love");
-    let user =  User.getUser(User.getCurrentUser().username);
+    try {
+        let loves = document.querySelectorAll(".love");
+        let user =  User.getUser(User.getCurrentUser().username);
 
-    for (let love of loves) {
-        love.addEventListener("click", (e) => {
-            if (toggle(e.target, "loved")) {
-                e.target.innerText = "favorite_border";
-                user.lovedProducts.unlove(user.username, +e.target.dataset.productId);
-                window.dispatchEvent(loved);
-            } else {
-                e.target.innerText = "favorite"
-                user.lovedProducts.love(user.username, +e.target.dataset.productId);
-                window.dispatchEvent(loved);
-            }
-        })
+        for (let love of loves) {
+            love.addEventListener("click", (e) => {
+                if (toggle(e.target, "loved")) {
+                    e.target.innerText = "favorite_border";
+                    user.lovedProducts.unlove(user.username, +e.target.dataset.productId);
+                } else {
+                    e.target.innerText = "favorite"
+                    user.lovedProducts.love(user.username, +e.target.dataset.productId);
+                }
+                user.update();
+            })
+        }
+    } catch (e) {
+
     }
-
 }
 
 function slider() {
@@ -119,8 +122,4 @@ setInterval(slider, 1500);
 
 function reset() {
     window.location.reload();
-//    root.innerHTML = "";
-//    FetchData(displayData);
-////    setRate();
-//    renderLove();
 }

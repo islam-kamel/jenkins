@@ -134,10 +134,6 @@ class LovedPorducts {
     }
 }
 
-window.addEventListener("loved", () => {
-    user.update();
-})
-
 class User {
 
     constructor(data) {

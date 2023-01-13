@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="static/css/bootstrap-grid.css">
     <!-- Main Css -->
     <link rel="stylesheet" href="static/css/jenkins.main.css">
+    <link rel="icon" href="static/images/logo/icon.ico">
     <style>
         .categories {
             z-index: 2;
@@ -156,20 +157,12 @@
         }
 
         .loading div > img {
-            position: absolute;
-            top: 50%;
-            left: calc(50% - 130px);
+            margin-right: 10px;
             width: 100px;
         }
 
-        .loading img,
-        .loading .spinner-border {
-            position: absolute;
-            top: calc(50% + 3px);
-        }
 
         .loading .spinner-border {
-            left: calc(50% - 16px);
             font-size: 12px;
             height: 1.5rem;
             width: 1.5rem;
@@ -231,10 +224,10 @@
 
 <body>
 <div class="loading">
-    <div class="text-center">
-        <img src="static/images/logo/Light-Logo.svg">
+    <div class="d-flex justify-content-center align-items-center h-100">
+        <img class="flex-shrink-0" src="static/images/logo/Light-Logo.svg">
 
-        <div class="spinner-border text-light" role="status">
+        <div class="spinner-border text-light flex-shrink-0" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
