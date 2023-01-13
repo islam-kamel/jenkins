@@ -1,9 +1,8 @@
 const fetched = new Event("fetched");
 const loved = new Event("loved");
-const viewd = new Event("viewd");
 
 window.onload = function () {
-    console.log("here")
+    displayLoginInfo();
     FetchData(displayData);
     getCategories();
 }
@@ -14,6 +13,7 @@ window.addEventListener("fetched", () => {
         lodaingArea.style.display = "none";
         }, 250);
 
+    getLatestView();
     setRate();
     renderLove();
 })
@@ -26,6 +26,7 @@ searchInput.addEventListener("input", (e) => {
         return false;
     }
     seRes.innerText = product.title;
+    seRes.setAttribute("data-product-id", product.id)
     seRes.parentNode.classList.add("active");
-    seRes.addEventListener("click", e => getProduct(e.target));
+    seRes.addEventListener("click", e => getProduct(e.target.dataset.productId));
 })

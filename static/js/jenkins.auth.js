@@ -13,6 +13,20 @@ function loginError() {
     error.classList.add("d-block");
 }
 
+function logout() {
+    removeItemFromLocalStorage("login");
+    window.location.reload();
+}
+function displayLoginInfo() {
+    try {
+        let {username} = getItemFromLocalStorage("login");
+        userInfo.innerHTML = "@"+username;
+        userInfo.innerHTML += `<button onclick="logout()" class="btn btn-dark mx-3">Logout</button>`
+    } catch (e) {
+        
+    }
+
+}
 loginform.addEventListener("submit", (e) => {
     e.preventDefault();
     let login = User.login({username: loginform.usernameLogin.value, password: loginform.passwordLogin.value});
@@ -22,9 +36,11 @@ loginform.addEventListener("submit", (e) => {
     }
     loginform.classList.add('was-validated');
     if (login) {
-        userInfo.innerHTML = "@"+loginform.usernameLogin.value;
-        document.querySelector("#loginForm > div.col-12 > div > button.btn.btn-secondary").click();
         saveLocalStorage("login", JSON.stringify({username: login.username}))
+        displayLoginInfo();
+        //        userInfo.innerHTML = "@"+loginform.usernameLogin.value;
+//        userInfo.innerHTML += `<button onclick="logout" class="btn btn-dark mx-3">Logout</button>`
+        document.querySelector("#loginForm > div.col-12 > div > button.btn.btn-secondary").click();
     } else {
         loginError();
     }
@@ -202,13 +218,18 @@ class User {
 }
 
 function setUserLove() {
-    let user = User.getUser(User.getCurrentUser().username);
-    let loved = user.lovedProducts.getAll();
-    for (let product of loved[user.username]) {
-        let love = document.querySelector(`.love[data-product-id="${product}"]`);
-        love.innerText = "favorite";
-        love.classList.add("loved");
+    try {
+        let user = User.getUser(User.getCurrentUser().username);
+        let loved = user.lovedProducts.getAll();
+        for (let product of loved[user.username]) {
+            let love = document.querySelector(`.love[data-product-id="${product}"]`);
+            love.innerText = "favorite";
+            love.classList.add("loved");
+        }
+    } catch (e) {
+
     }
+
 }
 
 (() => {

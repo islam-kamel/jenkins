@@ -208,6 +208,9 @@
             top: 50vh !important;
             right: 1%;
         }
+        .w-fit {
+            width: fit-content !important;
+        }
         .footer {
             background: #c7c7c733;
             margin-top: 5%;
@@ -215,6 +218,11 @@
         @media only screen and (max-width: 760px) {
             #root div:nth-child(odd) {
                 margin-bottom: 10px;
+            }
+        }
+        @media only screen and (min-width: 768px) and (max-width: 1208px ) {
+            .product-action * {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -234,7 +242,7 @@
 <header class="container-fluid m-0 p-0 navabr-container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#" onclick="reset()">
                 <img src="static/images/logo/Light-Logo.svg">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -269,8 +277,8 @@
 
                         </ul>
                     </div>
-                    <div id="userInfo">
-                        <button class="btn btn-outline-dark text-bg-dark fs-5" data-bs-toggle="modal"
+                    <div id="userInfo" class="d-flex align-items-center justify-content-between">
+                        <button class="btn btn-outline-dark text-bg-dark fs-5 mx-3" data-bs-toggle="modal"
                                 data-bs-target="#SignUp">SignUp
                         </button>
                         <button class="btn btn-dark bg-dark text-bg-dark fs-5" type="submit" data-bs-toggle="modal"

@@ -7,7 +7,6 @@ function getProduct(target, callBack) {
                 return callBack(this.response);
             }
             showDetails(this.response);
-//            window.dispatchEvent(viewd);
             latestView(this.response)
         }
     }
@@ -55,13 +54,7 @@ function showDetails(data) {
                                     <strong class="">Price:</strong>
                                     <span class="badge text-bg-light text-success mx-3">${data.price}$</span>
                                 </span>
-                                    <div>
-                                        <i class="material-icons-outlined">star_border</i>
-                                        <i class="material-icons-outlined">star_border</i>
-                                        <i class="material-icons-outlined">star_border</i>
-                                        <i class="material-icons-outlined">star_border</i>
-                                    </div>
-                                    <button class="btn btn-primary">Add to Cart</button>
+                                    <button class="btn btn-dark bg-text-dark">Add to Cart</button>
                                 </div>
                             </div>
                         </div>
