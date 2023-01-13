@@ -3,6 +3,7 @@ const loved = new Event("loved");
 const viewd = new Event("viewd");
 
 window.onload = function () {
+    console.log("here")
     FetchData(displayData);
     getCategories();
 }

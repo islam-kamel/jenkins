@@ -4,6 +4,8 @@ let lodaingArea = document.querySelector(".loading");
 
 
 function FetchData(callBack) {
+    console.log("here")
+
     let req = new XMLHttpRequest();
     let cacheResualt = cache.getProducts();
     if (cacheResualt) {
@@ -81,7 +83,11 @@ function toggle(element, query) {
          return false
      }
 }
-let user =  User.getUser(User.getCurrentUser().username);
+try {
+    let user =  User.getUser(User.getCurrentUser().username);
+} catch (e) {
+
+}
 function renderLove() {
     let loves = document.querySelectorAll(".love");
 
