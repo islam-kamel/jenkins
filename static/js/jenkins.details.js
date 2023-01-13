@@ -40,7 +40,7 @@ function showDetails(data) {
                         <div class="card-body">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h1 class="card-title" title="${data.title}">${data.title}</h1>
-                                <i class="material-icons-outlined love">favorite_border</i>
+                                <i class="material-icons-outlined love" data-product-id="${data.id}">favorite_border</i>
                             </div>
                             <div class="seller-info d-flex flex-column align-items-start mb-2">
                                 <div class="star-rate" rating="${Math.round(data.rating.rate)}">
@@ -54,7 +54,7 @@ function showDetails(data) {
                                     <strong class="">Price:</strong>
                                     <span class="badge text-bg-light text-success mx-3">${data.price}$</span>
                                 </span>
-                                    <button class="btn btn-dark bg-text-dark">Add to Cart</button>
+                                    <button class="btn btn-dark bg-text-dark" onclick="getProduct(${data.id}, addItems)">Add to Cart</button>
                                 </div>
                             </div>
                         </div>
@@ -68,4 +68,5 @@ function showDetails(data) {
     root.innerHTML = card;
     setRate();
     renderLove();
+    setUserLove();
 }

@@ -6,8 +6,6 @@ if (!localStorage.getItem("users")) {
     localStorage.setItem("users", "[]");
 }
 
-
-
 function loginError() {
     let error = document.querySelector("#loginForm > .invalid-feedback");
     error.classList.add("d-block");
@@ -38,14 +36,11 @@ loginform.addEventListener("submit", (e) => {
     if (login) {
         saveLocalStorage("login", JSON.stringify({username: login.username}))
         displayLoginInfo();
-        //        userInfo.innerHTML = "@"+loginform.usernameLogin.value;
-//        userInfo.innerHTML += `<button onclick="logout" class="btn btn-dark mx-3">Logout</button>`
+        window.location.reload();
         document.querySelector("#loginForm > div.col-12 > div > button.btn.btn-secondary").click();
     } else {
         loginError();
     }
-
-
 })
 
 signform.addEventListener("submit", (e) => {
@@ -78,34 +73,6 @@ function newUser(form) {
     return create.save();
 }
 
-class ProductRatings {
-    #ratings;
-    constructor() {
-        this.#ratings = {};
-        this.ratings = this.getAll();
-    }
-
-    setRating(username, productId, rating) {
-        let products = this.#ratings[username];
-        if (products === undefined) {
-            return this.#ratings[username] = JSON.parse(`{
-                "${productId}": ${rating}
-            }`);
-        }
-        return this.#ratings[username][productId] = rating;
-    }
-
-    getAll() {
-        return this.#ratings;
-    }
-
-    remove(username, prodeuctId) {
-        let ratings = this.getAll(username);
-        delete ratings[username][prodeuctId];
-        this.#ratings[username] = ratings[username];
-    }
-
-}
 class LovedPorducts {
     #products;
     constructor(products = false) {
@@ -237,4 +204,3 @@ function setUserLove() {
         })
     }
 })()
-//user = new User({fname:"islam", lname:"kamel", username:"islam.kamel"})

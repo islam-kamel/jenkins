@@ -1,10 +1,8 @@
 const fetched = new Event("fetched");
-const loved = new Event("loved");
 
 window.onload = function () {
     displayLoginInfo();
     FetchData(displayData);
-    getCategories();
 }
 
 window.addEventListener("fetched", () => {
@@ -12,7 +10,8 @@ window.addEventListener("fetched", () => {
     setTimeout(() => {
         lodaingArea.style.display = "none";
         }, 250);
-
+    
+    getCategories();
     getLatestView();
     setRate();
     renderLove();

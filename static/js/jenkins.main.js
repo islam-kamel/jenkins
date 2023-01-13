@@ -1,8 +1,6 @@
 let images = Array.from(document.querySelectorAll(".slider-container .slider .slider-images img"));
 let lodaingArea = document.querySelector(".loading");
 
-
-
 function FetchData(callBack) {
     let req = new XMLHttpRequest();
     let cacheResualt = cache.getProducts();
@@ -89,7 +87,6 @@ function renderLove() {
     try {
         let loves = document.querySelectorAll(".love");
         let user =  User.getUser(User.getCurrentUser().username);
-
         for (let love of loves) {
             love.addEventListener("click", (e) => {
                 if (toggle(e.target, "loved")) {
