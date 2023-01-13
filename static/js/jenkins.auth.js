@@ -21,7 +21,7 @@ function displayLoginInfo() {
         userInfo.innerHTML = "@"+username;
         userInfo.innerHTML += `<button onclick="logout()" class="btn btn-dark mx-3">Logout</button>`
     } catch (e) {
-        
+
     }
 
 }
@@ -185,20 +185,21 @@ function setUserLove() {
         let user = User.getUser(User.getCurrentUser().username);
         let loved = user.lovedProducts.getAll();
         for (let product of loved[user.username]) {
-            let love = document.querySelector(`.love[data-product-id="${product}"]`);
-            love.innerText = "favorite";
-            love.classList.add("loved");
-        }
-    } catch (e) {
+            try {
+                let love = document.querySelector(`.love[data-product-id="${product}"]`);
+                console.log(love, `.love[data-product-id="${product}"]`)
+                love.innerText = "favorite";
+                love.classList.add("loved");
+            } catch (e) {}
 
-    }
+        }
+    } catch (e) {}
 
 }
 
 (() => {
     let login = getItemFromLocalStorage("login");
     if (login) {
-        userInfo.innerHTML = "@"+login.username;
         window.addEventListener("fetched", () => {
             setUserLove();
         })
