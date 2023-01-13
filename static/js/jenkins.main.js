@@ -67,7 +67,7 @@ function displayData(data) {
 function setRate() {
     let stars = document.querySelectorAll('.star-rate');
     for (let star of stars) {
-        if (star.childNodes.length === 1) {
+        if (star.childNodes.length < 4) {
             star.innerHTML += '<i class="material-icons-outlined rated">star</i>'.repeat(+star.getAttribute("rating"))
             star.innerHTML += '<i class="material-icons-outlined">star_border</i>'.repeat(5 - +star.getAttribute("rating"))
         }
