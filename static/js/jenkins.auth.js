@@ -187,7 +187,6 @@ function setUserLove() {
         for (let product of loved[user.username]) {
             try {
                 let love = document.querySelector(`.love[data-product-id="${product}"]`);
-                console.log(love, `.love[data-product-id="${product}"]`)
                 love.innerText = "favorite";
                 love.classList.add("loved");
             } catch (e) {}

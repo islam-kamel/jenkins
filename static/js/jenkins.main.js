@@ -107,10 +107,9 @@ function renderLove() {
 
 function slider(src) {
     let image = document.querySelector(".slider-container .slider .slider-images div")
-    image.style.backgroundImage = `url(/static/images/carousel/${src})`;
+    image.style.backgroundImage = `url(./static/images/carousel/${src})`;
     image.classList.toggle("active");
     setTimeout(()=>{
-        console.log("here")
         image.classList.toggle("active")
     }, 3470)
 }
