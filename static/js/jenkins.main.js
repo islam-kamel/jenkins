@@ -1,4 +1,4 @@
-let images = Array.from(document.querySelectorAll(".slider-container .slider .slider-images img"));
+//let images = Array.from(document.querySelectorAll(".slider-container .slider .slider-images div"));
 let lodaingArea = document.querySelector(".loading");
 
 function FetchData(callBack) {
@@ -104,18 +104,24 @@ function renderLove() {
     }
 }
 
-function slider() {
-    if (images.length < 1) {
-        images = Array.from(document.querySelectorAll(".slider-container .slider .slider-images img"))
-        for (let image of images) {
-            image.classList.remove("active")
-        }
-    }
 
-    toggle(images.shift(), "active");
+function slider(src) {
+    let image = document.querySelector(".slider-container .slider .slider-images div")
+    image.style.backgroundImage = `url(/static/images/carousel/${src})`;
+    image.classList.toggle("active");
+    setTimeout(()=>{
+        console.log("here")
+        image.classList.toggle("active")
+    }, 3470)
 }
 
-setInterval(slider, 1500);
+let imageSource = ["3.png", "2.png", "1.png"];
+setInterval(() => {
+    if (!imageSource.length) {
+        imageSource = ["3.png", "2.png", "1.png"];
+    }
+    slider(imageSource.shift());
+    }, 3500)
 
 function reset() {
     window.location.reload();

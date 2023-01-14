@@ -13,6 +13,7 @@
 
 body {
     scroll-behavior: smooth;
+    background: #eee;
 }
 
 h1 {
@@ -46,22 +47,32 @@ h1 {
 }
 
 .slider-container {
-    margin-bottom: 510px;
+    margin-bottom: 500px;
 }
 
 .slider {
     position: relative;
 }
 
-.slider .slider-images img {
+.slider .slider-images div {
     position: absolute;
     opacity: 0;
     z-index: 1;
-    transition: ease-in opacity 0.3s;
+    transition: ease-in all 0.3s;
+    background-image: url(/static/images/carousel/3.png);
+    width: 100%;
+    height: 500px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-
-.slider .slider-images img.active {
-    opacity: 1;
+@keyframes  fade {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+.slider .slider-images div.active {
+/*    opacity: 1;*/
+    animation: ease-in-out fade .5s forwards;
 }
 
 .navbar-brand img {
