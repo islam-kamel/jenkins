@@ -30,6 +30,9 @@ function filterByCategories(target) {
                 }
             })
         }
+        setRate();
+        renderLove();
+        setUserLove();
         return true
     }
     req.onreadystatechange = function () {
@@ -49,7 +52,6 @@ function filterByCategories(target) {
             setRate();
             renderLove();
             setUserLove();
-
         }
     }
     req.open("GET", `https://fakestoreapi.com/products/category/${target.dataset.bsTarget}`);

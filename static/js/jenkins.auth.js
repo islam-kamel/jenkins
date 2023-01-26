@@ -2,9 +2,7 @@ const signform = document.forms.signupForm;
 const loginform = document.forms.loginForm;
 const data = JSON.parse(localStorage.getItem("users"));
 
-if (!localStorage.getItem("users")) {
-    localStorage.setItem("users", "[]");
-}
+if (!data) {saveLocalStorage("users", "[]")}
 
 function loginError() {
     let error = document.querySelector("#loginForm > .invalid-feedback");
@@ -15,16 +13,15 @@ function logout() {
     removeItemFromLocalStorage("login");
     window.location.reload();
 }
+
 function displayLoginInfo() {
     try {
         let {username} = getItemFromLocalStorage("login");
         userInfo.innerHTML = "@"+username;
         userInfo.innerHTML += `<button onclick="logout()" class="btn btn-dark mx-3">Logout</button>`
-    } catch (e) {
-
-    }
-
+    } catch (e) { }
 }
+
 loginform.addEventListener("submit", (e) => {
     e.preventDefault();
     let login = User.login({username: loginform.usernameLogin.value, password: loginform.passwordLogin.value});
@@ -95,7 +92,6 @@ class LovedPorducts {
         })
         return this.#products[username] = products;
     }
-
     getAll() {
         return this.#products;
     }
@@ -122,7 +118,6 @@ class User {
     }
     newPassword(password) {
         let hashed = User.hashPassword(password);
-        console.log(hashed, password)
         this._password = hashed;
         return this._password;
     };
@@ -138,7 +133,7 @@ class User {
         }
     }
     static login(obj) {
-        let data = JSON.parse(localStorage.getItem("users"));
+        let data = getItemFromLocalStorage("users");
         for (let user of data) {
             if (user.username === obj.username && User.hashPassword(obj.password) === user._password) {
                 return new User(user);
@@ -146,7 +141,6 @@ class User {
         }
         return false;
     }
-
     static getCurrentUser() {
         return getItemFromLocalStorage("login");
     }
@@ -169,7 +163,7 @@ class User {
         }
     }
     save() {
-        let obj = JSON.parse(localStorage.getItem("users"));
+        let obj = getItemFromLocalStorage("users");
         if (this.#vaildUser()) {
             obj[obj.length] = this;
             saveLocalStorage("users", JSON.stringify(obj));
@@ -177,7 +171,6 @@ class User {
         }
         return false;
     }
-
 }
 
 function setUserLove() {
@@ -193,7 +186,6 @@ function setUserLove() {
 
         }
     } catch (e) {}
-
 }
 
 (() => {
@@ -203,4 +195,4 @@ function setUserLove() {
             setUserLove();
         })
     }
-})()
+})();

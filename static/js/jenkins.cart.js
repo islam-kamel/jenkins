@@ -6,6 +6,7 @@ const cartName = "shopingCart";
         renderItems(products);
     }
 })();
+
 function addItems(product) {
     let products = getItemFromLocalStorage(cartName);
     if (!products) {
@@ -14,7 +15,7 @@ function addItems(product) {
     }
     product = JSON.parse(product);
     products[product.id] = product;
-    saveLocalStorage(cartName, JSON.stringify(products))
+    saveLocalStorage(cartName, JSON.stringify(products));
     renderItems(products);
 }
 

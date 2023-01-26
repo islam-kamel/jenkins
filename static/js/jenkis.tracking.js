@@ -7,12 +7,12 @@ function latestView(product) {
     }
     product = JSON.parse(product);
     views[product.id] = JSON.stringify(product);
-    saveLocalStorage("views", JSON.stringify(views))
+    saveLocalStorage("views", JSON.stringify(views));
 }
 
 function displayLatestView(data) {
     container = document.getElementById("autoGenerate");
-    container.innerHTML += data
+    container.innerHTML += data;
 }
 
 function buildContainer(title) {

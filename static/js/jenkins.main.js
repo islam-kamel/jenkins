@@ -1,4 +1,3 @@
-//let images = Array.from(document.querySelectorAll(".slider-container .slider .slider-images div"));
 let lodaingArea = document.querySelector(".loading");
 
 function FetchData(callBack) {
@@ -99,9 +98,7 @@ function renderLove() {
                 user.update();
             })
         }
-    } catch (e) {
-
-    }
+    } catch (e){}
 }
 
 

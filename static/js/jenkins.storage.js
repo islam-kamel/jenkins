@@ -3,7 +3,11 @@ function saveLocalStorage(key, value) {
 }
 
 function getItemFromLocalStorage(key) {
-    return JSON.parse(localStorage.getItem(key));
+    try {
+        return JSON.parse(localStorage.getItem(key));
+    } catch (e) {
+        return undefined
+    }
 }
 
 function removeItemFromLocalStorage(key) {
